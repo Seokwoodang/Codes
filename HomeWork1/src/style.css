@@ -1,0 +1,72 @@
+.App{
+    background-color:rgb(255, 255, 255);
+   
+    height:100vh;
+    width:100vw;
+    display:flex;
+}
+
+.container{
+    background-color: #fff;
+    width:50vw;
+    max-width:350px;
+    height:80vh;
+    padding:16px;
+    border:1px solid #ddd;
+    margin:auto;
+    border-radius:5px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+#circle_1{
+    margin : 0 1px 0 0;
+    padding : 0px;
+    max-width: 35px;
+    width : 35px;
+    height : 35px;
+    border-radius: 50%;
+    background-color: yellow;
+}
+
+#circle_2{
+    margin :0;
+    flex-direction: row;
+    display : flex;
+    max-width: 35px;
+    width : 35px;
+    height : 35px;
+    border-radius: 50%;
+    background-color: rgb(160, 160, 155);
+}
+
+#triangle{
+    width: 0px;
+    height: 0px;
+    border-left: 35px solid purple;
+    border-top: 18px solid transparent;
+    border-bottom: 18px solid transparent;
+}
+
+#Avg{
+    color:blue;
+    text-align:center;
+}
+
+.container>h3{
+    color:rgb(0, 0, 0);
+    text-align:center;
+
+}
+
+.container>.line{
+    margin : 16px 0px;
+}
+
+#hey{
+    display: flex;
+    margin-top:10px;
+}
+
