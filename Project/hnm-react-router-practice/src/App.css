@@ -1,0 +1,51 @@
+.login-button{
+  display:flex;
+  justify-content: flex-end;
+  margin:20px;
+}
+
+.controltower{
+  display: flex;
+  flex-direction: column;
+}
+
+
+.nav-section{
+  display: flex;
+  justify-content: center;
+}
+
+.menu-list{
+  display:flex;
+  list-style-type: none;
+}
+
+.navbox{
+  display: flex;
+}
+
+.menu-list li{
+  padding:10px
+}
+
+
+.menu-area{
+  display: flex;
+  justify-content: center;
+  width:100%;
+}
+
+.search{
+  border-top-width: 0;
+  border-bottom-width: 1;
+  border-left-width: 0;
+  border-right-width: 0;
+}
+
+.searchbox{
+
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin-right:15px;
+}
