@@ -2,16 +2,16 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import './App.css';
 import styled from "styled-components";
-
+import ContentList from './component/ContentList';
 
 const Home = () => {
   return (
-    <div MainFrame>
+    <div>
         <div className='title'>
-            Hello
+            hello
         </div>
-        <div className='MainBody'>
-            this is body part
+        <div className='mainBody'>
+            <ContentList/>
             <Link to={`/detail`}><Button><strong>+</strong></Button></Link>
         </div>
     </div>

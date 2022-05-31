@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useParams,Link } from "react-router-dom";
+import React, { useState,useRef } from 'react'
+import { useParams,Link,useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useDispatch } from 'react-redux';
 
@@ -29,50 +29,55 @@ const DetailFrame=styled.div`
     height :100vh;
 `;
 
-const QestionBox=styled.input`
+const QuestionBox=styled.input`
   width: 300px;
   height:20px;
   margin-bottom: 5px;
 `;
 
-const SearchBox = () => {
+const ContentInput=()=>{
 
-  const[title,setTitle]=useState('');
-  const[genre,setGenre]=useState('');
-  const[actor,setActor]=useState('');
-  const[director,setDirector]=useState('');
+  const[title,setTitle]=useState();
+  const[genre,setGenre]=useState();
+  const[actor,setActor]=useState();
+  const[director,setDirector]=useState();
+
+
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const addContents=(event)=>{
-    dispatch({type:"ADD_CONTENTS",payload:{title,genre,actor,director}}) 
-    };
-  
+    event.preventDefault();
+    dispatch({type:"ADD_CONTENTS",payload:{title,genre,actor,director}});
+    navigate("/");
+  }
+
+
+
   return (
     <DetailFrame>
-      <Box>
+      <form onSubmit={addContents}>
       <h1 className='DetailTitle'>title</h1>
       <h2>Tell me your favorite movie!!</h2>
       <div>
         <strong>Title</strong><br/>
-        <QestionBox type="text" onChange={(event)=>setTitle(event.target.value)}/>
+      <QuestionBox onChange={(event)=>setTitle(event.target.value)}/>
       </div>
       <div>
       <strong>Genre</strong><br/>
-      <QestionBox type="text" onChange={(event)=>setGenre(event.target.value)}/>
+      <QuestionBox onChange={(event)=>setGenre(event.target.value)}/>
       </div>
       <div>
       <strong>Actor</strong><br/>
-      <QestionBox type="text" onChange={(event)=>setActor(event.target.value)}/>
+      <QuestionBox onChange={(event)=>setActor(event.target.value)}/>
       </div>
       <div>
       <strong>Director</strong><br/>
-      <QestionBox type="text" onChange={(event)=>setDirector(event.target.value)}/>
+      <QuestionBox onChange={(event)=>setDirector(event.target.value)}/>
       </div>
-      <Link to="/"><Button>submit</Button></Link>
-      </Box>
+      <button type="submit">submit</button>
+      </form>
     </DetailFrame>
-
   )
 }
 
-export default SearchBox;
+export default ContentInput;

@@ -1,16 +1,17 @@
 import React from 'react';
-import SearchBox from './ContentInput';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import ContentItem from './ContentItem';
 
-
 const ContentList = () => {
-    const contentList = useSelector(state=>state.contentList);
-  return (
-    <div>
-        {contentList.map((item)=>(<ContentItem item={item}/>))}
-    </div>
-  )
+    const contentList = useSelector(state => state.contentList);
+    console.log(contentList);
+    return (
+        <div>
+            {contentList&&contentList.map((item,index)=>(
+            <ContentItem key={index} item={item}/>
+            ))}
+        </div>
+    )
 }
 
-export default ContentList
+export default ContentList;
