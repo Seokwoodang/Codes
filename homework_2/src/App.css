@@ -1,0 +1,25 @@
+
+.App{
+  height:100vh;
+  width :100vw;
+}
+
+.title{
+  font-size: 50px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  height : 100px;
+}
+
+.plusButton{
+  position:fixed;
+  right: 20px;
+  bottom:20px;
+  border-radius: 50px;
+}
+
+.MainBody{
+  height:90vh;
+  width:100vw;
+}
