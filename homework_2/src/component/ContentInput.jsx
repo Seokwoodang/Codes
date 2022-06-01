@@ -2,6 +2,7 @@ import React, { useState,useRef } from 'react'
 import { useParams,Link,useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useDispatch } from 'react-redux';
+import ADD_MOVIE from "../redux/reducer/reducer"
 
 
 const Button=styled.div`
@@ -35,6 +36,8 @@ const QuestionBox=styled.input`
   margin-bottom: 5px;
 `;
 
+
+
 const ContentInput=()=>{
 
   const[title,setTitle]=useState();
@@ -44,15 +47,21 @@ const ContentInput=()=>{
 
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const addContents=(event)=>{
-    event.preventDefault();
-    dispatch({type:"ADD_CONTENTS",payload:{title,genre,actor,director}});
-    navigate("/");
+  
+
+  const addContents=()=>{
+
   }
 
 
+  dispatch(ADD_MOVIE({
+    title:title,
+    genre:genre,
+    actor:actor,
+    director:director})
+  )
 
+  
   return (
     <DetailFrame>
       <form onSubmit={addContents}>

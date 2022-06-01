@@ -4,7 +4,6 @@ import ContentItem from './ContentItem';
 
 const ContentList = () => {
     const contentList = useSelector(state => state.contentList);
-    console.log(contentList);
     return (
         <div>
             {contentList&&contentList.map((item,index)=>(
