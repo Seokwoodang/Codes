@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { ADD_MOVIE } from '../redux/reducer';
 import { db } from '../firebase';
 import { loadMovieFB } from '../redux/reducer';
+import { addMovieFB } from '../redux/reducer';
 
 const Button=styled.div`
 color:white;
@@ -53,11 +54,16 @@ const Add=()=>{
   const addContents=(event)=>{
    
     event.preventDefault();
-    dispatch(ADD_MOVIE({
+    dispatch(addMovieFB({
       title:title,
       genre:genre,
       actor:actor,
-      director:director})) 
+      director:director}))
+    /*dispatch(ADD_MOVIE({
+      title:title,
+      genre:genre,
+      actor:actor,
+      director:director}))*/ 
       navigate("/");
   }
 

@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 import MovieList from "../components/movielist"
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loadMovieFB } from '../redux/reducer';
 
 const Home = () => {
-  
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -21,31 +21,64 @@ const Home = () => {
     }
 
   return (
-    <div>
-        <div className='title'>
-            hello
-        </div>
-        <div onSubmit={detail} className='mainBody'>
+    <BackGround>
+        <Header>
+           <h1>영화가 좋아</h1>
+        </Header>
+        <Body onSubmit={detail}>
             <MovieList/>
-            
             <Link to={`/detail`}><Button><strong>+</strong></Button></Link>
-        </div>
-    </div>
+        </Body>
+    </BackGround>
   )
 }
 
-const Button = styled.div `
+const Header= styled.div`
+  font-family: title;
+  background-color: #C2DED1;
   display: flex;
   justify-content: center;
+`;
+
+const Body= styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+
+const boxFade = keyframes`
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`
+
+const Button = styled.div `
+  display: flex;
+  color: white;
+  justify-content: center;
   align-items: center;
-  font-size: 50px;
+  font-size: 30px;
   position:fixed;
   right: 50px;
   bottom:50px;
   border-radius: 50px;
   width:50px;
   height:50px;
-  background-color: tomato;
+  background-color: #354259;
+
+
+`;
+
+const BackGround = styled.div`
+background-color: #ECE5C7;
+height : 100vh;
+width:100vw;
 `;
 
 export default Home;

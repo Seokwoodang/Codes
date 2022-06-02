@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './redux/configstore'
 import { BrowserRouter } from 'react-router-dom';
+import GlobalBack from './GlobalStyle';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -13,6 +14,7 @@ root.render(
   
   <Provider store={store}>
     <BrowserRouter>
+    <GlobalBack/>
     <App />
     </BrowserRouter>
   </Provider>
