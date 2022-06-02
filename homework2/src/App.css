@@ -2,3 +2,8 @@
     font-family: "title";
     src:url("./font/비트로\ 코어\ TTF.ttf")
 }
+
+@font-face{
+    font-family: "body";
+    src: url("./font/ChosunGu.TTF");
+}

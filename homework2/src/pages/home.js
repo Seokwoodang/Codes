@@ -11,7 +11,6 @@ const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-
   React.useEffect(()=>{
     dispatch(loadMovieFB());
   },[])
