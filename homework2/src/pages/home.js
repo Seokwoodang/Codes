@@ -3,10 +3,18 @@ import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import MovieList from "../components/movielist"
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loadMovieFB } from '../redux/reducer';
 
 const Home = () => {
   
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+
+  React.useEffect(()=>{
+    dispatch(loadMovieFB());
+  },[])
 
   const detail=()=>{
     navigate("/");
@@ -19,6 +27,7 @@ const Home = () => {
         </div>
         <div onSubmit={detail} className='mainBody'>
             <MovieList/>
+            
             <Link to={`/detail`}><Button><strong>+</strong></Button></Link>
         </div>
     </div>

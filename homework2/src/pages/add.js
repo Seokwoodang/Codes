@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import styled from "styled-components";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ADD_MOVIE } from '../redux/reducer';
+import { db } from '../firebase';
+import { loadMovieFB } from '../redux/reducer';
 
 const Button=styled.div`
 color:white;
@@ -38,7 +40,6 @@ const QuestionBox=styled.input`
 
 
 const Add=()=>{
-
   
   const[title,setTitle]=useState();
   const[genre,setGenre]=useState();
@@ -47,6 +48,7 @@ const Add=()=>{
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
 
   const addContents=(event)=>{
    
@@ -58,7 +60,6 @@ const Add=()=>{
       director:director})) 
       navigate("/");
   }
-
 
   return (
     <DetailFrame>
@@ -85,8 +86,6 @@ const Add=()=>{
     </form>
     </DetailFrame>
   )
-
-  
 }
 
 export default Add;
