@@ -4,21 +4,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
-import { auth } from '../firebase';
+import { auth,db,storage } from '../firebase';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import { storage } from '../firebase';
 import { addDoc, collection } from 'firebase/firestore';
-import { db } from '../firebase';
+import { useDispatch } from 'react-redux';
+import { addCommentFB } from '../redux/reducer';
 import { useRef } from 'react';
+import { useSelector } from 'react-redux';
+import { getCookie } from '../cookie';
+
 
 const Post = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const house = <FontAwesomeIcon icon={faHouse} /> 
   const file_link_ref = React.useRef(null);
 
+  const userList = useSelector(state => state.userList);
   const title_ref = useRef(null);
   const comment_ref=useRef(null);
-
 
   const uploadFB = async(e)=>{
     console.log(e.target.files)
@@ -27,7 +31,7 @@ const Post = () => {
       e.target.files[0]
     )
     console.log(uploaded_file);
-
+    
     const file_url=await getDownloadURL(uploaded_file.ref);
 
     console.log(file_url);
@@ -35,13 +39,15 @@ const Post = () => {
   }
 
   const upload=async()=>{
-    const user_doc = await addDoc(collection(db,"post"),{
-      image_url:file_link_ref.current?.url,
-      title:title_ref.current?.value,
-      comment:comment_ref.current?.value,
-
-    })
+    dispatch(addCommentFB({
+      image_url : file_link_ref.current.url,
+      comment : comment_ref.current.value,
+      email : getCookie("email"),
+    }))
+    navigate("/");
   }
+  console.log(userList);
+
 
   return (
     <>
@@ -52,13 +58,12 @@ const Post = () => {
     </Buttons>
   </Header>
     <Box>
-      <p>이미지 제목 : <input ref={title_ref}/></p>
+
       <p>이미지 코멘트 : <input ref={comment_ref}/></p>
       <input type="file" onChange={uploadFB}/>
       <br/><br/>
       <button onClick={upload}>업로드하기</button>
     </Box>
-
   </>
   )
 }
@@ -103,7 +108,7 @@ const Button=styled.div`
   background-color: #9A86A4;
   margin-left: 10px;
   border-radius: 10px;
-
 `;
+
 
 export default Post

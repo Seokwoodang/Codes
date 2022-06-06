@@ -4,36 +4,28 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
-import { useNavigate } from 'react-router-dom';
 
-const MovieForm = ({item}) => {
-  
-
+const CommentForm = ({item}) => {
   const house = <FontAwesomeIcon icon={faHouse} /> 
   const navigate = useNavigate();
+  console.log(item);
   return (
     <div>
-          <Header>
-      <Home onClick={()=>{navigate('/')}}>{house}</Home>
-      <Buttons>
-        <Button onClick={()=>{navigate('/join')}}>Join</Button>
-        <Button onClick={()=>{navigate('/login')}}>Login</Button>
-      </Buttons>
-    </Header>
-
-    <Box onClick={navigate("/detail")}>
-      <h2>{item.ProImg}</h2>
-      <p>{item.email}</p>
-      <p>{item.date}</p>
-      <p>{item.content}</p>
-      <p>{item.img}</p>
-      <p>좋아요{item.like}개</p>
-      <p>댓글 {item.comment}개</p>
+    <Box /*onClick={navigate("/detail")}*/>
+      <Img src={item.image_url}/>
+      <p>{item.title}</p>
+      <p>{item.comment}</p>
+      
     </Box>
     </div>
   )
 }
 
+const Img = styled.img `
+  width:150px;
+  height:200px;
+
+`;
 
 const Box = styled.div `
   font-family: body;
@@ -75,4 +67,4 @@ const Button=styled.div`
   border-radius: 10px;
 
 `;
-export default MovieForm;
+export default CommentForm;

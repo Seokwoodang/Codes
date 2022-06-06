@@ -8,7 +8,8 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebase';
 import { collection,addDoc } from 'firebase/firestore';
 import { db } from '../firebase';
-
+import { addUserFB } from '../redux/signing';
+import { async } from '@firebase/util';
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -20,8 +21,26 @@ const Signup = () => {
   const[pwcheck,setPwcheck]=useState(0);
   
 
-  const sign=async ()=>{
-    
+
+
+  const sign=async()=>{
+
+    const user = await createUserWithEmailAndPassword(
+      auth,
+      id,
+      pw
+      );
+      console.log(user);
+
+    dispatch(addUserFB({
+      user_id:user.user.email,
+      user_pw:pw,
+      user_nick:nick,
+      user_pwcheck:pwcheck,
+    }))
+
+
+/*
   const user = await createUserWithEmailAndPassword(
     auth,
     id,
@@ -34,7 +53,7 @@ const Signup = () => {
     user_pw:pw,
     user_pwch:pwcheck,
     user_nick:nick
-  })
+  })*/
   navigate("/")  
   }
 

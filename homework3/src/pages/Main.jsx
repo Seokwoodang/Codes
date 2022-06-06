@@ -7,12 +7,20 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { async } from '@firebase/util';
-import { useState } from 'react';
+import { useState} from 'react';
+import CommentList from '../components/commentList';
+import { loadCommentFB } from '../redux/reducer';
+import { useDispatch } from 'react-redux';
 
 const Main = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const house = <FontAwesomeIcon icon={faHouse} /> 
   const [is_login, setIsLogin] = useState(false);
+
+  React.useEffect(()=>{
+    dispatch(loadCommentFB());
+  },[])
 
   const loginCheck= async(user)=>{
     if(user){
@@ -48,6 +56,7 @@ const Main = () => {
       </Buttons>
     </Header>
     <Body>
+      <CommentList/>
     {is_login?(<Post onClick={Go}><strong>+</strong></Post>):null}
     </Body>
     </>

@@ -9,13 +9,14 @@ import Post from "./pages/Post";
 import Login from "./pages/Login";
 import { auth } from './firebase';
 import { onAuthStateChanged,signOut } from 'firebase/auth';
+import { setCookie,getCookie,deleteCookie  } from './cookie';
 
 function App() {
 
   const [is_login, setIsLogin]=useState(false);
 
-  console.log(auth.currentUser);
 
+  console.log(auth.currentUser);
   const loginCheck= async (user)=>{
     if(user){
       setIsLogin(true)
