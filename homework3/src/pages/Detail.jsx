@@ -7,8 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { getCookie } from '../cookie';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { collection,getDoc,doc,query,where, getDocs } from 'firebase/firestore';
-import { db } from '../firebase';
+
 import { deleteCommentFB } from '../redux/reducer';
 
 const Detail = () => {
@@ -21,6 +20,10 @@ const Detail = () => {
     navigate("/");
   }
   
+  const move = ()=>{
+    navigate(`/update/${id}`)
+  }
+
 return (
     <> 
     < Header > 
@@ -40,13 +43,12 @@ return (
 </Header>
 
 <Box>
-   <button onClick={navigate("/")}>수정</button>
-    <button onClick={()=>delet(id)}>삭제</button> 
+   <Button onClick={move}>수정</Button>
+    <Button onClick={()=>delet(id)}>삭제</Button> 
     </Box>
     </>
 )
-
-          }
+}
 const Box = styled.div `
   font-family: body;
   padding: 10px;
@@ -71,11 +73,6 @@ const Title=styled.h1 `
   text-shadow:  0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #a12719, 0 0 30px #732a16, 0 0 40px #af3720, 0 0 55px #af3720, 0 0 75px #af3720, 2px 2px 2px rgba(206,197,0,0);
   font-family: title1;
   font-size: 3.2rem;
-`;
-
-const P = styled.p`
-  color:white;
-  margin-left: 15px;
 `;
 
 const Buttons = styled.div`

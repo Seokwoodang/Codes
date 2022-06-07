@@ -4,20 +4,21 @@ import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth,db,storage } from '../firebase';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import { addDoc, collection } from 'firebase/firestore';
 import { useDispatch } from 'react-redux';
-import { addCommentFB } from '../redux/reducer';
 import { useRef } from 'react';
-import { useSelector } from 'react-redux';
 import { getCookie } from '../cookie';
-import { updateCommentFB } from '../redux/reducer';
+import { editCommentFB } from '../redux/reducer';
+import { useParams } from 'react-router-dom';
 
-const Post = () => {
+const Update = () => {
+  const {id} = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const file_link_ref = React.useRef(null);
   const comment_ref=useRef(null);
 
+
+  //이미지 넣기
   const uploadFB = async(e)=>{
     console.log(e.target.files)
     const uploaded_file= await uploadBytes(ref(
@@ -31,14 +32,15 @@ const Post = () => {
     file_link_ref.current= {url:file_url};
   }
 
-  const upload=async()=>{
-    dispatch(updateCommentFB({
+  //업로드 파트
+  const upload=async(id)=>{
+    dispatch(editCommentFB({
       image_url : file_link_ref.current.url,
       comment : comment_ref.current.value,
       email : getCookie("user_email"),
      nickname:getCookie("user_nickname"),
       user_pic:getCookie("user_pic")
-    }))
+    },id))
     navigate("/");
   }
 
@@ -54,7 +56,7 @@ const Post = () => {
       <P>Img Comment : <input ref={comment_ref}/></P>
       <input type="file" onChange={uploadFB}/>
       <br/><br/>
-      <button onClick={upload}>업로드하기</button>
+      <button onClick={()=>upload(id)}>업로드하기</button>
     </Box>
   </>
   )
@@ -117,4 +119,4 @@ const Button=styled.div`
 `;
 
 
-export default Post
+export default Update
