@@ -1,4 +1,3 @@
-import './App.css';
 import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Main from "./pages/Main";
@@ -16,7 +15,7 @@ function App() {
   const [is_login, setIsLogin]=useState(false);
 
 
-  console.log(auth.currentUser);
+  
   const loginCheck= async (user)=>{
     if(user){
       setIsLogin(true)
@@ -33,7 +32,7 @@ function App() {
   return (
     <Routes>
       <Route path='/' element={<Main/>}/>
-      <Route path='/detail' element={<Detail/>} />
+      <Route path='/detail/:id' element={<Detail/>} />
       <Route path='/sign' element={<Signup/>} />
       <Route path='/notice' element={<Notice/>} />
       <Route path='/post' element={<Post/>} />

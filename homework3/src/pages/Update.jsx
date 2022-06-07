@@ -1,7 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth,db,storage } from '../firebase';
@@ -12,16 +10,12 @@ import { addCommentFB } from '../redux/reducer';
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { getCookie } from '../cookie';
-
+import { updateCommentFB } from '../redux/reducer';
 
 const Post = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const house = <FontAwesomeIcon icon={faHouse} /> 
   const file_link_ref = React.useRef(null);
-  const a = getCookie('email')
-  const userList = useSelector(state => state.userList);
-  const title_ref = useRef(null);
   const comment_ref=useRef(null);
 
   const uploadFB = async(e)=>{
@@ -30,7 +24,6 @@ const Post = () => {
       storage,`images/${e.target.files[0].name}`),
       e.target.files[0]
     )
-    console.log(uploaded_file);
     
     const file_url=await getDownloadURL(uploaded_file.ref);
 
@@ -39,14 +32,13 @@ const Post = () => {
   }
 
   const upload=async()=>{
-    dispatch(addCommentFB({
+    dispatch(updateCommentFB({
       image_url : file_link_ref.current.url,
       comment : comment_ref.current.value,
       email : getCookie("user_email"),
      nickname:getCookie("user_nickname"),
       user_pic:getCookie("user_pic")
     }))
-    console.log(getCookie("user_email"))
     navigate("/");
   }
 

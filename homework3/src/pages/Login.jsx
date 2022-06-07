@@ -26,14 +26,16 @@ import { setCookie } from '../cookie';
       id_ref.current.value, 
       pw_ref.current.value
       )
-      console.log(user)
+      console.log(user);
       const user_docs= await getDocs(query(
         collection(db,"users"),where("user_id","==",user.user.email)
       ));
       
       user_docs.forEach((u)=>{
         console.log(u.data());
-        setCookie("email",u.data().user_id)
+        setCookie("user_email",u.data().user_id)
+        setCookie("user_nickname",u.data().user_nick)
+        setCookie("user_pic",u.data().user_pic)
       })
       navigate("/");
 }
@@ -43,10 +45,9 @@ import { setCookie } from '../cookie';
   return (
     <>
     <Header>
-      <Home onClick={()=>{navigate('/')}}>{house}</Home>
+      <Title onClick={()=>{navigate('/')}}>Lord of the Ring</Title>
       <Buttons>
         <Button onClick={()=>{navigate('/sign')}}>SignUp</Button>
-        <Button onClick={()=>{navigate('/login')}}>Login</Button>
       </Buttons>
     </Header>
 
@@ -65,6 +66,13 @@ import { setCookie } from '../cookie';
     </>
   )
 }
+const Title=styled.h1 `
+  text-align: center;
+  color:#fff53e;
+  text-shadow:  0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #a12719, 0 0 30px #732a16, 0 0 40px #af3720, 0 0 55px #af3720, 0 0 75px #af3720, 2px 2px 2px rgba(206,197,0,0);
+  font-family: title1;
+  font-size: 3.2rem;
+`;
 
 const Home = styled.div`
   display: flex;
@@ -75,13 +83,17 @@ const Home = styled.div`
 const Header=styled.div`
   height: 100px;
   align-items: center;
-  background-color: #B1BCE6;
+  background-color: #000000;
+  position:relative;
 `;
 
 const Buttons = styled.div`
   display: flex;
   justify-content: end;
   align-items: center;
+  position: absolute;
+  right : 1rem;
+  top:1rem;
 `;
 
 const Button=styled.div`
@@ -91,7 +103,7 @@ const Button=styled.div`
   width:200px;
   height:40px;
   background-color: #9A86A4;
-  margin-left: 10px;
+  margin: 2rem 3rem 0 0;
   border-radius: 10px;
 `;
 

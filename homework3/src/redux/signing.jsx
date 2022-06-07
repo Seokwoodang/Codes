@@ -20,6 +20,7 @@ export const addUserFB=(user)=>{
         dispatch(Add(user_data));
     }
 }
+
 /*
   const user_doc = await addDoc(collection(db,"users"),{
     user_id:user.user.email,
