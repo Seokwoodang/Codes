@@ -16,10 +16,10 @@ import { useEffect } from 'react';
 import { StLogin, Header, Buttons, Title,Post } from '../components/styled';
 import { async } from '@firebase/util';
 import { addTwoFB } from '../redux/two';
+import Comments from '../components/comments';
+import { loadTwoFB } from '../redux/two';
 
 const Detail = () => {
-
-
 
   const [is_login, setIsLogin] = useState(false);
   const [is_user,setIsUser]=useState(false);
@@ -30,7 +30,8 @@ const Detail = () => {
   const data = useSelector(state=>state.reducer.commentList);
   const datanow = data.filter((value)=>value.id === id)
   const comment_ref = React.useRef(null);
-  console.log(datanow[0].comment)
+  const commentList = useSelector(state=>state.comment.twoList);
+  const commentnow = commentList.filter((value)=>value.post_id===id);
 
   const loginCheck=(user)=>{
     if(user){
@@ -41,14 +42,20 @@ const Detail = () => {
     }
   }
 
-  const comment= async()=>{
+  const comment= async(id)=>{
     dispatch(addTwoFB({
       comment:comment_ref.current.value,
+      user_pic:getCookie("user_pic"),
+      user_email:getCookie("user_email"),
+      user_nickname:getCookie("user_nickname"),
+     post_id:id,
     }))
   }
 
-
-
+  
+  React.useEffect(()=>{
+    dispatch(loadTwoFB());
+  },[dispatch])
 
   useEffect(()=>{
     onAuthStateChanged(auth,loginCheck);
@@ -73,7 +80,7 @@ return (
             <StLogin onClick={()=>{navigate("/login")}}>Login</StLogin>}
     </Buttons>
 </Header>
-<Box >
+<Box>
       <Di>
       <Img src={datanow[0].image_url}/>
       </Di>
@@ -89,12 +96,14 @@ return (
       <P>{datanow[0].comment}</P>
       <CommentBox>
         <Line/>
-        Comments
         <br/><p>Wanna Say Something?</p>
         <Comment ref={comment_ref}/>
-        
+        <button onClick={()=>{comment(id)}}>submit</button>
+        <P>Comments</P>
+        {commentnow&&commentnow.map((item,index)=>(
+          <Comments item={item} key={index}/>
+        ))} 
       </CommentBox>
-
     </Box>
     </>
 )
@@ -156,7 +165,7 @@ const Pro = styled.div`
 `;
 
 const Di = styled.div`
-  height:70%;
+  
   display: flex;
   justify-content: center;
   margin-bottom: 1.5rem;
@@ -179,10 +188,10 @@ const Img = styled.img `
 const Box = styled.div `
   font-family: body;
   padding: 10px;
-  margin: 5rem auto auto auto;
+  margin: 2rem auto auto auto;
   background-color: rgba(255,255,255,0.2);
-  width: 500px;
-  height:700px;
+  width: 50rem;
+  height:100%;
   border-radius: 10px;  
   font-family: "title1";
 `;

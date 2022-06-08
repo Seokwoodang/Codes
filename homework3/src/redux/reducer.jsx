@@ -44,10 +44,8 @@ export const addCommentFB=(comment)=>{
 export const loadCommentFB=()=>{
     return async function(dispatch){
         const comment_data=await getDocs(collection(db,"post"));
-        // console.log("comment_data : "+comment_data)
         let comment_list = [];
          comment_data.forEach((comment)=>{
-             
              comment_list.push({id:comment.id,...comment.data()})
          });
          dispatch(Load(comment_list));
@@ -81,7 +79,7 @@ export const editCommentFB=(payload,id)=>async(dispatch,getState)=>{
 }
 
 function reducer(state= initialState,action){
-    console.log(action.payload)
+   // console.log(action.payload)
     switch(action.type){
         case LOAD :
             return{...state,commentList:action.payload}

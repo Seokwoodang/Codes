@@ -7,10 +7,8 @@ import { height } from '@mui/system';
 import { getCookie } from '../cookie';
 
 const CommentForm = ({item}) => {
-  const house = <FontAwesomeIcon icon={faHouse} /> 
-  const navigate = useNavigate();
   
-  //console.log(item);
+
   return (
     <div>
      

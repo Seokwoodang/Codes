@@ -7,7 +7,7 @@ import styled from "styled-components";
 const CommentList = () => {
 
     const commentList = useSelector(state => state.reducer.commentList);
-    console.log(commentList);
+    
   return (
         <Body>
             {commentList&&commentList.map((item,index)=>(
