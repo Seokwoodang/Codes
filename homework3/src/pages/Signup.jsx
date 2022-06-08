@@ -13,6 +13,8 @@ import { async } from '@firebase/util';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useRef } from 'react';
 import { setCookie } from '../cookie';
+import { StLogin, Header, Buttons, Title,Post } from '../components/styled';
+
 const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -68,7 +70,7 @@ const Signup = () => {
     <Header>
       <Title onClick={()=>{navigate('/')}}>Lord of the Ring</Title>
       <Buttons>
-        <Button onClick={()=>{navigate('/login')}}>Login</Button>
+        <StLogin onClick={()=>{navigate('/login')}}>Login</StLogin>
       </Buttons>
     </Header>
     <Box>
@@ -96,47 +98,6 @@ const Signup = () => {
     </>
   )
 }
-
-const Title=styled.h1 `
-  text-align: center;
-  color:#fff53e;
-  text-shadow:  0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #a12719, 0 0 30px #732a16, 0 0 40px #af3720, 0 0 55px #af3720, 0 0 75px #af3720, 2px 2px 2px rgba(206,197,0,0);
-  font-family: title1;
-  font-size: 3.2rem;
-`;
-
-const Home = styled.div`
-  display: flex;
-  justify-content: start;
-  align-items: center;
-`;
-
-const Header=styled.div`
-  height: 100px;
-  align-items: center;
-  background-color: #000000;
-  position:relative;
-`;
-
-const Buttons = styled.div`
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  position: absolute;
-  right : 1rem;
-  top:1rem;
-`;
-
-const Button=styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width:200px;
-  height:40px;
-  background-color: #9A86A4;
-  margin: 2rem 3rem 0 0;
-  border-radius: 10px;
-`;
 
 const Box = styled.div`
 margin: 50px auto 0px auto;

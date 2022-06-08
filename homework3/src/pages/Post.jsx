@@ -6,18 +6,16 @@ import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth,db,storage } from '../firebase';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import { addDoc, collection } from 'firebase/firestore';
 import { useDispatch } from 'react-redux';
 import { addCommentFB } from '../redux/reducer';
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { getCookie } from '../cookie';
-
+import { StLogin } from '../components/styled';
 
 const Post = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const house = <FontAwesomeIcon icon={faHouse} /> 
   const file_link_ref = React.useRef(null);
   const a = getCookie('email')
   const userList = useSelector(state => state.userList);
@@ -55,7 +53,7 @@ const Post = () => {
   <Header>
       <Title onClick={()=>{navigate('/')}}>Lord of the Ring</Title>
       <Buttons>
-        <Button onClick={()=>{signOut(auth);}}>LogOut</Button>
+        <StLogin onClick={()=>{signOut(auth);navigate('/')}}>LogOut</StLogin>
       </Buttons>
     </Header>
     <Box>
@@ -96,33 +94,20 @@ width :500px;
 height: 600px;
 `;
 
-const Home = styled.div`
-  display: flex;
-  justify-content: start;
-  align-items: center;
-`;
 const Header=styled.div`
   height: 100px;
   align-items: center;
   background-color: #000000;
   position: relative;
 `;
+
 const Buttons = styled.div`
   display: flex;
   justify-content: end;
   align-items: center;
+  position:absolute;
+  right : 1rem;
+  top:1rem;
 `;
-
-const Button=styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width:200px;
-  height:40px;
-  background-color: #9A86A4;
-  margin-left: 10px;
-  border-radius: 10px;
-`;
-
 
 export default Post

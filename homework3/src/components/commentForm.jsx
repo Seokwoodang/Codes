@@ -85,27 +85,4 @@ const Box = styled.div `
   font-family: "title1";
 `;
 
-const Header=styled.div`
-  height: 100px;
-  align-items: center;
-  background-color: #B1BCE6;
-`;
-
-const Buttons = styled.div`
-  display: flex;
-  justify-content: end;
-  align-items: center;
-`;
-
-const Button=styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width:200px;
-  height:40px;
-  background-color: #9A86A4;
-  margin-left: 10px;
-  border-radius: 10px;
-
-`;
 export default CommentForm;

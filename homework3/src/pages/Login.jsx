@@ -8,7 +8,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { db } from '../firebase';
 import { getDocs,where,query,collection } from 'firebase/firestore';
 import { setCookie } from '../cookie';
-
+import { StLogin, Header, Buttons, Title,Post } from '../components/styled';
 
 
   const Login = () => {
@@ -40,61 +40,31 @@ import { setCookie } from '../cookie';
       navigate("/");
 }
 
-
-
   return (
     <>
     <Header>
       <Title onClick={()=>{navigate('/')}}>Lord of the Ring</Title>
       <Buttons>
-        <Button onClick={()=>{navigate('/sign')}}>SignUp</Button>
+        <StLogin onClick={()=>{navigate('/sign')}}>SignUp</StLogin>
       </Buttons>
     </Header>
 
     <Box>
-      <h1>로그인페이지</h1>
+      <h1>LogIn</h1>
       <p>
-      아이디<br/>
-      <input placeholder='아이디를 입력하시죠' ref = {id_ref}/>
+      I D <br/>
+      <input placeholder='What is your ID,,,' ref = {id_ref}/>
       </p>
       <p>
-      비밀번호<br/>
-      <input placeholder='비밀번호는 남들에게 알려주지마세요' ref={pw_ref} type="password"/>
+      Password<br/>
+      <input placeholder='What is your password,,,' ref={pw_ref} type="password"/>
       </p>
-      <button onClick={loginFB}>로그인하기</button>
+      <button onClick={loginFB}>LogIn</button>
     </Box>
     </>
   )
 }
-const Title=styled.h1 `
-  text-align: center;
-  color:#fff53e;
-  text-shadow:  0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #a12719, 0 0 30px #732a16, 0 0 40px #af3720, 0 0 55px #af3720, 0 0 75px #af3720, 2px 2px 2px rgba(206,197,0,0);
-  font-family: title1;
-  font-size: 3.2rem;
-`;
 
-const Home = styled.div`
-  display: flex;
-  justify-content: start;
-  align-items: center;
-`;
-
-const Header=styled.div`
-  height: 100px;
-  align-items: center;
-  background-color: #000000;
-  position:relative;
-`;
-
-const Buttons = styled.div`
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  position: absolute;
-  right : 1rem;
-  top:1rem;
-`;
 
 const Button=styled.div`
   display: flex;
